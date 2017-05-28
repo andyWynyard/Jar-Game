@@ -12,15 +12,15 @@ public class Game {
     String tryAgain = "";
   
     while (isRunning) {  
-  
+      Scanner keyboard = new Scanner(System.in);
+
       System.out.println("----ADMIN SETUP FOR GAME----");       
       System.out.print("Enter an item: "); 
-      Scanner scan = new Scanner(System.in);
-      String itemName = scan.next();
+      String itemName = keyboard.next();
       System.out.print("Enter the max number alowed:  "); //BUG: Negative number breaks the game
-      int maxCapacity = scan.nextInt();
+      int maxCapacity = keyboard.nextInt();
       System.out.print("Enter a user name:  ");
-      String userName = scan.next(); 
+      String userName = keyboard.next(); 
       
       //Explain to the user what they have chosen above so everyone is clear.
       
@@ -30,13 +30,13 @@ public class Game {
       //This is where the code for the game goes.
         
       Random random = new Random();
-      int numberOfItems = random.nextInt(maxCapacity) + 1; // The plus one is cause its like arrays.
+      int numberOfItems = random.nextInt(maxCapacity) + 1; // The plus one is because this is an array.
       int guess; //Gotta declare it first.
       int counter = 0;
       
       do {
       System.out.printf("It has taken you %d turns. Guess how many items in the jar: ", counter);
-      guess = scan.nextInt();
+      guess = keyboard.nextInt();
       
         if (guess > numberOfItems) {
           System.out.printf("Sorry, %d was the wrong answer, you need to guess lower.\n", guess);
@@ -51,10 +51,16 @@ public class Game {
         System.out.printf("Congrats %s, %d was the right number of %s in the jar. It only took you %d turns.\n", userName, guess, itemName, counter);   
       }
     
-      //Enable the game to repeat. It would have probs been here I would put the high score code, but I want to move on. 
+      // Enable the game to repeat.
+
+      /*
+      ************************************************************
+      ******** TODO: Enable a save feature for High Scores *******
+      ************************************************************
+      */
       
       System.out.print("Would you like to play again (Y/N):  ");
-      tryAgain = scan.next(); 
+      tryAgain = keyboard.next(); 
      
       if (tryAgain.equalsIgnoreCase("n")) isRunning = false;
       
@@ -64,10 +70,11 @@ public class Game {
       
       
       // The following is the innitial code that didnt tell if the guesser was higher or lower than the random value.
+      
       /* 
       do {
         System.out.printf("It has taken you %d turns. Guess how many items: ", counter);
-        guess = scan.nextInt();
+        guess = keyboard.nextInt();
         counter ++;
       } while (guess != numberOfItems);
       
